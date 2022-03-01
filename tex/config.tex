@@ -1,0 +1,114 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Customization Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Aliases
+\newcommand{\faculty}{}
+\newcommand{\client}{An Example Company}
+\newcommand{\cptc}{AEC}
+\newcommand{\teamname}{New Haven Hacking Inc.}
+\newcommand{\logopath}{images/general/logo.png}
+\newcommand{\institution}{University of New Haven}
+\renewcommand{\doctitle}{Penetration Test Report}
+
+% Custom Colors
+% Used for moderate threat level text for better readability compared to default yellow
+\definecolor{threatyellow}{RGB}{180,180,0}
+% Used to set title page background color. Useful if logo background is not transparent.
+% This makes it so there is no square with a different background color.
+\definecolor{titlebackground}{HTML}{ffffff} % Default: ffffff
+
+% Toggle Team Members list on title page
+\newboolean{teamMembersEnabled} % Do not modify this line
+% Set to true to enable the list, false to disable it.
+\setboolean{teamMembersEnabled}{true}
+
+% Team Members
+% One team member per line.
+% Example: \teammember{name}{email@example.tld}
+\newcommand{\teammembers}{
+\teammember{Samuel Zurowski}{szuro1@unh.newhaven.edu}
+\teammember{Charles Barone}{cbaro4@unh.newhaven.edu}
+}
+
+% Institution logo on title page
+\newboolean{institutionLogoEnabled} % Do not modify this line
+% Set to true to enable the institution logo, false to disable it.
+\setboolean{institutionLogoEnabled}{true}
+\newcommand{\institutionlogo}{images/general/insitutionlogo.png}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   DO NOT MODIFY BELOW HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Redefined Commands
+\renewcommand\theadfont{\bfseries}
+
+% Custom Commands
+\newcommand\todo[1]{\textcolor{red}{#1}}
+\newcommand{\teammember}[2]{{#1} & \href{mailto:{#2}}{{#2}}  \\}
+% Example: \vuln{Lack of MariaDB Authentication}{7.5}{5}{10}
+\newcommand{\vuln}[4]{#1 & \vulncolor{#2}#2 & \vulncolor{#3}#3 & \vulncolor{#4}#4 \\ \hline}
+\newcommand{\vulncolor}[1]{
+        \ifboolexpr{
+            test {\ifdimless{#1 pt}{4.0pt}}
+        }
+        {\cellcolor{green}} % Score < 4.0 (Low)
+        {\ifboolexpr{
+            test {\ifdimless{#1 pt}{7.0pt}}
+        }
+        {\cellcolor{yellow}} % Score < 7.0 (Moderate)
+        {\ifboolexpr{
+            test {\ifdimless{#1 pt}{9.0pt}}
+        }
+        {\cellcolor{orange}} % Score < 9.0 (High)
+        {\cellcolor{red}}}} % Score >= 9.0 (Critical)
+}
+\newcommand{\vulntext}[1]{\textbf{Threat Level}:\vulntextcolor{#1}}
+\newcommand{\vulntextcolor}[1]{
+        \ifboolexpr{
+            test {\ifdimless{#1 pt}{4.0pt}}
+        }
+        {\color{green}{Low (#1)}} % Score < 4.0 (Low)
+        {\ifboolexpr{
+            test {\ifdimless{#1 pt}{7.0pt}}
+        }
+        {\color{threatyellow}{Moderate (#1)}} % Score < 7.0 (Moderate)
+        {\ifboolexpr{
+            test {\ifdimless{#1 pt}{9.0pt}}
+        }
+        {\color{orange}{High (#1)}} % Score < 9.0 (High)
+        {\color{red}{Critical (#1)}}}} % Score >= 9.0 (Critical)
+}
+
+% Custom Environments
+\newenvironment{vulntable}
+    {
+        \noindent
+        The following table breaks down the discovered vulnerabilities by overall risk score, impact, and exploitability.  The scores were calculated using NIST's CVSS v3.1 calculator \cite{nvdcvss}.
+        \begin{center}
+            \textbf{Summary of Vulnerabilities by Base Score}
+        \end{center}
+        \begin{table}[h]
+        \renewcommand{\arraystretch}{1.25}
+        \centering
+        \begin{tabular}{|>{\centering}p{15em}|c|>{\centering}p{4em}|c|}\hline
+        \textbf{Risk Summary} & \textbf{Overall Risk Score} & \textbf{Impact} & \textbf{Exploitability} \\\hline
+    }
+    { 
+        \end{tabular}
+        \end{table}
+    }
+
+    

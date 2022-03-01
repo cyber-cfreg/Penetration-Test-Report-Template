@@ -1,0 +1,71 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% If a specific methodology was utilized for the penetration test, it should be indicated here:
+% This example cites PTES, MITRE ATT&K, OWASP Top 10, PCI-DSS, and NIST SP 800-53:
+\section{Testing Methodology}
+\subsection{Penetration Testing Execution Standard}
+    Throughout the engagement \teamname, references the Penetration Testing Execution Standard (PTES) when conducting security assessments \cite{PTES}.
+    
+    \Figure[placement=h, width=\textwidth, caption={PTES Methodology}]{images/general/PTES.png}
+
+\subsection{MITRE ATT\&CK Framework}
+
+    MITRE ATT\&CK is a knowledge base of Tactics, Techniques, and Procedures (TTPs) based upon real-world observations from security professionals. ATT\&CK is a curated knowledge base for cyber adversary behavior, reflecting the attack lifecycle and platforms known to target. \teamname\ uses ATT\&CK to aide in understanding TTPs that can be used to conduct an attack against \cptc\ that could be conduct by real world adversaries \cite{attack}.
+
+\subsection{OWASP Top 10}
+
+    Referenced in this report is the Open Web Application Security Project (OWASP) Top 10 when applications are found within the applicable scope \cite{owasptop10}. OWASP Top 10 focuses vulnerabilities focus on common vulnerabilities that pose security risks to web applications:
+    \setlength\arrayrulewidth{1.25pt}
+
+    \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.25}
+        \begin{tabular}{|wl{8cm}|wl{8cm}|}\hline
+             1. Broken Access Controls& 6. Vulnerable and Outdated Components  \\ \hline
+             2. Cryptographic Failures& 7. Identification and Authentication Failures \\ \hline
+             3. Injection& 8. Software and Data Integrity Failures\\ \hline
+             4. Insecure Design & 9. Security Logging and Monitoring Failures\\ \hline
+             5. Security Misconfiguration & 10. Server-Side Request Forgery \\ \hline
+        \end{tabular}
+        \caption{OWASP Top 10 }
+        \label{tab:owasp10}
+    \end{table}
+
+\subsection{PCI DSS Auditing}
+
+One of the requests of \cptc\ was for experience in PCI DSS from the RFP. Throughout the engagement, \teamname\ audited PCI DSS compliance in accordance with the proper Self-Assessment Questionnaire (SAQ). By doing this, \teamname\ can ensure which PCI DSS security requirements are met in accordance with the proper SAQ for the type(s) of transactions being performed by \cptc. Each PCI DSS compliance failure can be found in Section \ref{sec:compliance}.
+
+\subsection{NIST SP 800-53}
+
+NIST SP 800-53 is the National Institute of Standards and Technology Special Publication 800-53, Security and Privacy Controls for Federal Information Systems and Organization. NIST 800-53 is a security compliance standard that offers guidance for how organizations should select then maintain security and privacy controls for information systems. NIST 800-53 is mandatory for all federal agencies however, its guidelines can be adopted by any organization operating information systems with sensitive or regulated data. This standard provides a catalog of privacy and security controls for protecting against various threats.
+
+Table \ref{tab:nistteighthundredff} provides security and privacy control methodology which are organized into 20 families. These control families are referenced throughout the document and are used to constitute common terminology. Additionally, referenced in NIST 800-53 is control families enhancements to help provide guidance to aide in securing \cptc's information systems \cite{nist80053}.
+
+
+\begin{table}[h]
+\centering
+\caption{NIST 800-53 Security and Privacy Control Families for Compliance.}
+\label{tab:nistteighthundredff}
+\begin{tabular}{|l|p{16em}|l|p{16em}|}
+\hline
+\multicolumn{1}{|c|}{\textbf{ID}} & \multicolumn{1}{c|}{\textbf{Family}} & \multicolumn{1}{c|}{\textbf{ID}} & \multicolumn{1}{c|}{\textbf{Family}} \\ \hline
+{\textbf{AC}} & Access Control                            & {\textbf{PE}} & Physical and Environmental Protection \\ \hline
+{\textbf{AT}} & Awareness and Training                    & {\textbf{PL}} & Planning                              \\ \hline
+{\textbf{AU}} & Audit and Accountability                  & {\textbf{PM}} & Program Management                    \\ \hline
+{\textbf{CA}} & Assessment, Authorization, Monitoring     & {\textbf{PS}} & Personnel Security                    \\ \hline
+{\textbf{CM}} & Configuration Management                  & {\textbf{PT}} & PII Processing and Transparency       \\ \hline
+{\textbf{CP}} & Contingency Planning                      & {\textbf{RA}} & Risk Assessment                       \\ \hline
+{\textbf{IA}} & Identification and Authentication         & {\textbf{SA}} & System \& Services Acquisition        \\ \hline
+{\textbf{IR}} & Incident Response                         & {\textbf{SC}} & System \& Communications Protection   \\ \hline
+{\textbf{MA}} & Maintenance                               & {\textbf{SI}} & System \& Information Integrity       \\ \hline
+{\textbf{MP}} & Media Protection                          & {\textbf{SR}} & Supply Chain Risk Management          \\ \hline
+\end{tabular}
+\end{table}

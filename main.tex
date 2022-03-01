@@ -1,0 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt, table,dvipsnames]{article}
+\include{packages}
+\include{tex/config}
+\begin{document}
+\title{\doctitle}
+\pagenumbering{arabic}
+\input{title}
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents\thispagestyle{fancy}
+\newpage
+\include{tex/sections/1_1_executive}
+\input{tex/sections/1_2_overview}
+\input{tex/sections/1_3_scope}
+\newpage
+\include{tex/sections/2_1_observations}
+\include{tex/sections/3_methodology}
+\newpage
+\include{tex/sections/4_findings}
+\include{tex/sections/5_conclusion}
+\include{tex/sections/6_appendices}
+\end{document}

@@ -1,0 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Report Overview}
+\subsection{Executive Summary}
+    % This is the first text in the report, it should address the you client's executives. It should include a few paragraphs (2-3) that should introduce the engagement the report is for followed by the explaining the structure of the report in a non-technical manner. Explain the "Report Overview" and "Technical Findings" sections purposes.
+    % Following this you should try to address a business level risk that will catch the attention of the executive.
+    % If you have any severely critical risks to the security of your client you should also add in a paragraph to explain these to the executives in a NON-TECHNICAL manner. You should also mention the potential business impact of these.
+    % Lastly, you should should give a summary of the quantity of vulnerabilities by severity. You may also want to include a sentence to explain a trend in vulnerabilities, if such a trend exists.
+    % An example is included below:
+    \teamname\ was contacted by \client\ (\cptc) for a penetration test in order to identify security issues within their infrastructure. This report was written initially on January 7th and submitted on January 9th at 1:00AM. This penetration test is in the interest of \cptc, as part of a restrained scope penetration test and risk assessment. The Report Overview section contains an outlined summary of \teamname's findings, including recommendations for improving \cptc's security, mitigating potential business risk, and reducing attack surface. The Technical Findings section expands upon the report overview by including each discovered vulnerability's evaluated risk, exploitation details, and recommended remediation steps.
+    
+    Based upon the results of the assessment, \cptc\ is at risk to be fined by payment providers due to severe PCI DSS violations. These fines could range from \$5,000 to \$100,000 per month depending on factors such as size of business \cite{pcsdssfees}. Based on these issues, we suggest spending resources to become complaint. Details of all PCI DSS violations can be found in Section \ref{sec:compliance}. 
+    
+    \teamname\ was able to gain full access to a SCADA system using the default credentials. This device is extremely important as it is critical to industrial systems which operate the storage, delivery, and packaging warehouse facility. Similarly, the industrial control device is not isolated in any way, could be manipulated by any user on the network. It is important to take this with extreme caution, as malicious tampering with these devices could result in loss of life. This would result in unwanted attention, could harm the companies reputation, and could cost \cptc vast sums of money from both lawsuits and long term loss of business.
+    
+    During this engagement, a total of \textbf{11} vulnerabilities were found in \cptc's network. In terms of severity, \textbf{3} vulnerabilities are critical, \textbf{3} vulnerabilities are high, \textbf{1} vulnerability is moderate, and \textbf{4} vulnerabilities posed low risk. Many of the vulnerabilities in the environment are due to improper authentication, default credentials, or not applying principles of least privileges. More information about these vulnerabilities can be found in Section \ref{sec:tech}.

@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{ScadaBR Reflected XSS (Username)}
+    \label{sec:scadabr_xss_1_username}
+    \noindent
+    
+    \vulntext{1.25}
+    
+    \noindent
+    
+    
+    \color{black}{}
+    \textbf{Description}:
+    
+    A cross-site scripting (XSS) vulnerability was found in the login portal of ScadaBR.  A malicious actor could supply malicious Javascript to redirect users and steal cookies.  
+    
+    \Figure[placement=h, width=\textwidth, frame, caption={XSS Vulnerability in username input field}]{images/findings/low/example_low_finding.png}
+    
+    \noindent
+    \textbf{Potential Business Impact}:
+    
+    Because this vulnerability uses reflected XSS instead of stored XSS, phishing would most likely be required for a successful exploit.  However, an employee of \cptc falling for a phishing campaign could lead to drive-by downloads and cookie theft, resulting in the potential compromise of machines on the network.
+    
+    \noindent
+    \textbf{Affected Host}:
+    
+    Crunch (10.0.17.50)
+    
+    Crunchserial (10.0.17.51)
+    
+    \noindent
+    \textbf{Exploitation Details}:
+    
+    Results can be reproduced by navigating to \textit{http://10.0.17.50:9090/ScadaBR/} (without having been authenticated beforehand) and typing the following in the username field:
+    
+\begin{lstlisting}[language=bash,frame=single,showstringspaces=false]
+admin"><script>alert("XSS")</script>
+\end{lstlisting}
+
+    This will result in a reflected cross-site vulnerability displaying an alert on the page with the text ``XSS''.  While the alert text is only an example, a threat actor could include arbitrary JavaScript in the payload.
+    
+    \noindent
+    \textbf{Recommended Remediation}:
+    
+    Validate \& sanitize all form fields to prevent XSS attacks. Use a Web application firewall (WAF) to block the execution of malicious scripts. Additionally, convert all alphanumeric characters to HTML character entities before displaying user input. To ensure that cookies cannot be stolen, it is recommended to include in the headers ``Secure'' and ``HttpOnly'' so that cookies are not accessible to unintended parties and are sent over HTTPS. At the moment, the web traffic on the ScadaBR server is not encrypted. The Secure header can only be implemented once TLS is implemented and enabled on the host. 
+    
+    
+    \noindent
+    \textbf{References}:
+    
+    \url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies}
+    
+    \emph{CEHv11 Ethical Hacking and Countermeasures - Volume 2}
+    

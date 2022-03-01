@@ -1,0 +1,44 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Insufficient Firewalls}
+\label{sec:insufficient-firewalls}
+\noindent
+
+
+\color{black}{}
+\textbf{Description}:
+
+During the engagement, many of the services and hosts interacted displayed insufficient Firewall Rules. 
+
+\noindent
+\textbf{Potential Business Impact}:
+This could save potential incidents of breach as by enabling firewalls with strong rules could thwart attackers from gaining unauthorized access to systems that potentially contain security vulnerabilities such as remote code execution.
+
+\noindent
+\textbf{Recommended Remediation}:
+On hosts setup up proper firewalls using iptables, ufw, or other software. Examples of these can be found in Section \ref{sec:mysql_no_auth}. PCI DSS requires firewall zone-based controls between trusted and untrusted zones. Some best practices for firewalls are to:
+
+\begin{itemize}
+    \item Block traffic by default
+    \item Set Explicit Firewall Rules First 
+    \item Establish firewall configuration change plan 
+    \item Optimize firewall rules
+    \item Update Firewall Software Regularly
+\end{itemize}
+
+Additionally, it may also be beneficial for \cptc\ to implement intrusion-detection and/or intrusion-prevention systems on the network to help with detecting and preventing future exploitation of the network.
+
+\noindent
+\textbf{References}:
+
+\url{https://backbox.com/7-firewall-best-practices-for-securing-your-network/}
+\url{https://www.checkpoint.com/cyber-hub/network-security/what-is-firewall/8-firewall-best-practices-for-securing-the-network/}
+

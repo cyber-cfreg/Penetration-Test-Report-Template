@@ -1,0 +1,56 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Payment Transaction Enumeration}
+\label{sec:payment_enumeration}
+
+    \vulntext{4.5}
+    
+    % Description ================================================================================ 
+    \color{black}{}
+    \noindent
+    \textbf{Description}:
+    
+    The Jawbreaker portal on the eggdicator host allows users to enter transaction IDs and returns transaction information including the amount, customer\_id, and status. All customer transactions can be enumerated without any authentication (see Figure \ref{fig:images/findings/moderate/example_moderate_finding.png}).
+    
+    \Figure[placement=h, width=\textwidth, frame, caption={Powershell Script to pull all Customer transactions.}]{images/findings/moderate/example_moderate_finding.png}
+    
+    % Impact ================================================================================ 
+    \noindent
+    \textbf{Potential Business Impact}:
+    
+    Potential attackers could extract all transactions regarding the revenue of \cptc. Although theses transactions only refer to the customer as a UUID, the value is unique to that customer and could be used to associate multiple transactions to specific purchasers. 
+    
+    
+        \noindent
+        \textbf{Affected Hosts}:
+        
+            Eggdicator (10.0.17.10)
+    
+    % Details ================================================================================ 
+    \noindent
+    \textbf{Exploitation Details}:
+    
+    The powershell script shown above can be used by navigating to \textit{https://10.0.17.10/payment/\$i} and replacing ``\$i'' with a numeric value.  This would return JSON data regarding a transaction if one exists with the given ID. Based on results obtained from the script, a total of 6469 transactions were present and extractable.
+    
+    % Remediation ================================================================================ 
+    \noindent
+    \textbf{Recommended Remediation}:
+    
+    Using a UUID instead of an id for each transaction would mitigate sequential enumeration and would greatly increase the time needed for a brute force attack. Additionally, rate limiting hosts to only a specific number of requests per minute (more information can be found in references) would further mitigate the attack. Moreover, implementing authentication on the API would limit enumeration to only authorized users.  Access tokens or basic http authentication are both options which would help reduce the risk introduced by this vulnerability.
+    
+    \noindent
+    \textbf{References}:
+    
+    \url{https://www.nginx.com/blog/rate-limiting-nginx/}
+    \url{https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/}
+    
+        %\url{https://nvd.nist.gov/vuln/detail/CVE-2019-9193#vulnCurrentDescriptionTitle}
+    

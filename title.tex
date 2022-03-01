@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+\begin{center}
+
+\pagecolor{titlebackground}\afterpage{\nopagecolor}
+
+\vspace{0.25cm}
+\textsc{\normalsize\faculty}\\[1.0cm]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth/2]{\logopath}
+\end{figure}
+
+
+% Title
+\HRule\\[0.2cm]
+{\huge\bfseries\doctitle}
+\HRule\\[1.5cm]
+\vfill
+\vfill
+\Large{Conducted by:}
+\vfill
+\LARGE{\textbf{\teamname}}
+
+\vfill
+\vfill
+\vfill
+\vfill
+\ifthenelse{\boolean{teamMembersEnabled}}{
+    \small{}
+    \begin{tabular}{l r}
+      \large\emph{Team Members} & 
+      \large\emph{Email} \\[0.5cm]
+      \teammembers
+    \end{tabular}
+    \begin{center}
+    \end{center}
+}{}
+\vfill
+
+\ifthenelse{\boolean{institutionLogoEnabled}}{\includegraphics{\institutionlogo}}{}
+
+\vfill
+\vfill
+\large{\today}
+\vfill
+\vfill
+
+% % Bottom of the page
+{\footnotesize {\color{red}{NOTICE: The information provided in this document is CONFIDENTIAL and is intended only for \cptc}}}
+
+\end{center}
+\end{titlepage}

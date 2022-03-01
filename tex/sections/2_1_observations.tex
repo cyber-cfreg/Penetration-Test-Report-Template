@@ -1,0 +1,75 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This section should be written after the technical findings. It should be written with the same target audience as an executive summary. 
+% The goal of this section is to categorize your findings in a high level manner for c-level executives. For each "slice" in the pie chart, there should be a short summary of what the implications for the organization are for said vulnerabilities. An example of what this might look like is included below with one of these summaries. (In this example the category "Vulnerabilities" represents any generic vulnerabilities that were found which do not fit another category.)
+\section{Observations}
+This section serves as a high level overview of the security posture of \cptc. A detailed list of all discovered vulnerabilities can be found in Section \ref{sec:tech}. It is important to note that this list is by no means exhaustive and that there are most likely vulnerabilities that \teamname\ did not find.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \pie
+        [
+            rotate=180, 
+            after number=,
+            radius=5,
+            /tikz/nodes={text=black, font=\normalfont},
+            /tikz/every pin/.style={align=center, text=black, font=\normalfont},
+            sum=auto
+        ]
+        {
+            2/Data Exposures,
+            2/Network Design,
+            2/Default Credentials,
+            3/Improper Authentication,
+            1/Misconfigurations,
+            1/Vulnerabilities
+	    }
+    \end{tikzpicture}
+    \caption{Summary of Issues within the Network}
+\end{figure}
+
+
+\section*{Default Credentials \& Lack of authentication}
+The most immediate observation about \cptc's security posture is that default, null, and passwordless authentication was discovered on multiple systems. \teamname\ was able to gain access into a SCADA system using the same credentials (which were default) as the last engagement.  The system in question is critical to the storage, delivery, and packaging processes within the warehouse facility. Moreover, several databases contained this same issue and were found to not be requiring password authentication. It is important to remember these credentials are for critical services and PII. These weaknesses can have an enormous impact on \cptc's ability to operate if discovered by threat actors. These vulnerabilities can be remediated with low cost and have an outsized impact on the security of \cptc. More details on mitigation for vulnerabilities such as these can be found in each vulnerability's remediation suggestions in Section \ref{sec:tech}. 
+
+
+    
+
+\subsection{Summary of Recommendations}
+
+The following is an overview of recommendations which should be implemented:
+
+\begin{itemize}
+    \item Resolve any PCI DSS compliance violations in Section \ref{sec:compliance} and ensure that \cptc\ is currently meeting all documentation requirements set by PCI DSS.
+    \item Implement both ingress \& egress filtering to reduce attack surface on hosts.
+    \item Ensure all hosts use least privilege principals to reduce attack surface.
+    \item Ensure proper encryption is used for confidential data (e.g. passwords and card holder data).
+    \item Implementation of a strong password policy.
+    \item Implement Multi-Factor authentication to provide defense in depth in addition to passwords.
+    \item Uses centralized logging to be able to respond to potential incidents faster.
+    \item Ensure null or password-less authentication is not allowed.
+    \item Ensure only necessary services are running within the subnet.
+\end{itemize}
+
+\subsection{Positive Security Measures}
+As the engagement progressed, \teamname\ was impeded by the security safeguards \cptc\ had in place.  A number of basic security best practices were observed that limited \teamname 's ability to move through the network. Some instances of aforementioned security practices implemented by \cptc\ include:
+
+\begin{itemize}
+    \item The usage of TLS on websites to protect information.
+    \item The usage of Cross-Origin Resource Sharing (CORS) headers prevented specific attacks.
+    \item The marketplace \& music player required authentication.
+    \item Some APIs required authentication in order to query sensitive information (although not all).
+\end{itemize}
+
+These controls should be continuously monitored and regulated to maintain the company's security posture.
+
+\input{tex/sections/2_3_compliance}

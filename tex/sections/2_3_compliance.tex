@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This section should only be retained if a compliance review is being performed during the penetration test.
+% The example below details what PCI-DSS violations might look like in a report:
+\clearpage
+\subsection{Compliance}
+\subsubsection{PCI DSS Violations}
+\label{sec:compliance}
+
+    The following table details violations of the PCI Data Security Standard discovered by \teamname\ over the scope of this engagement.
+    
+    \begin{table}[H]
+        \renewcommand{\arraystretch}{1.25}
+        \centering
+        \begin{tabular}{|p{8em}|p{20em}|p{9em}|}
+            \hline
+            \textbf{Regulation} & \textbf{Reason} & \textbf{Reference} \\ \hline
+            PCI DSS 1.1.4 & A firewall is not implemented at every internet connection. & Section \ref{sec:insufficient-firewalls} \\ \hline
+            PCI DSS 1.2 & The PostgreSQL server that stores cardholder data does not have a firewall restricting connections from untrusted networks. & Section \ref{sec:creds}  \\ \hline
+            PCI DSS 1.3 & The PostgreSQL server is not segmented through the use of a DMZ. & Section \ref{sec:creds} \\ \hline
+            PCI DSS 2.1 & Default accounts were not removed from all systems on the network. & Sections \ref{sec:creds} \\ \hline
+            PCI DSS 2.2 & No evidence found to indicate that \cptc\ has configuration standards. & N/A \\ \hline
+            PCI DSS 2.2.1 & The server ``charley'' had more than one primary function implemented: MariaDB and PostgreSQL. & Sections \ref{sec:creds} \& \ref{sec:mysql_no_auth} \\ \hline
+            PCI DSS 2.2.2 & No evidence of documentation for enabled insecure services, daemons, or protocols. &  N/A \\ \hline
+            PCI DSS 2.2.4 & There were insecure security parameters present on system configurations. No found evidence of documented common system security parameters and no evidence of system configuration standards. & Sections \ref{sec:creds} \\ \hline
+            PCI DSS 2.4 & An inventory of what was considered to be in scope for PCI DSS was not provided to penetration testers nor found during the engagement. & N/A \\ \hline
+            PCI DSS 2.5 & No evidence of security policies and operational procedures was found during the engagement & N/A \\ \hline
+        \end{tabular}
+        \caption{PCI DSS Compliance Violations.}
+        \label{tab:compliance_violations}
+    \end{table}

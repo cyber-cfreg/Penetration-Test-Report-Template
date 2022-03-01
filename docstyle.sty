@@ -1,0 +1,75 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProvidesPackage{docstyle}
+
+% French support packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+
+\usepackage{pgf-pie}  
+
+\usepackage[USenglish]{babel}
+% Layout packages
+\usepackage{lmodern}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{fancyhdr}
+\usepackage{placeins}
+\usepackage{wrapfig}
+\usepackage[letterpaper, left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm, headheight=15pt]{geometry}
+\usepackage{hyperref}
+\hypersetup{colorlinks, allcolors=black}
+
+% References
+\usepackage{csquotes}
+\usepackage[style=numeric,
+            backend=biber, 
+            sorting=none
+]{biblatex}
+\addbibresource{references.bib}
+
+
+% Caption
+\usepackage{capt-of}
+
+% For dotted table of content
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{2.3em}{3.2 em}}
+\makeatother
+
+%more control over table layouts
+\usepackage{tabulary}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\usepackage{float}
+\restylefloat{table}
+
+% Horizontal line and separator
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\hseparator}{\hspace{0.3em}-\hspace{0.3em}}
+
+\newcommand{\doctitle}{}
+
+\fancypagestyle{footmark}{
+  \ps@@fancy % use {fancy} style as a base of {footmark}
+  \fancyfoot[C]{\footmark}
+}
+% sets value of \footmark and sets the correct style for this page only
+\newcommand\markfoot[1]{\gdef\footmark{#1}\thispagestyle{footmark}}
+
+% Page layout
+\pagestyle{fancy}
+
+\lhead{\client\ - \teamname}
+\rhead{\doctitle}
+\cfoot{\color{red}{NOTICE: CONFIDENTIAL FOR \cptc\ ONLY}}
+\rfoot{Page \thepage}

@@ -1,0 +1,90 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mysql no auth
+\subsubsection{Lack of MariaDB Authentication}
+\label{sec:mysql_no_auth}
+
+\noindent
+\vulntext{7.5}
+
+% Description ================================================================================ 
+\color{black}{}
+\noindent
+\textbf{Description}:
+
+    Unauthenticated access to a MySQL database permits access/modification to sensitive datasets, including the following:
+    
+    \begin{itemize}
+        \item Customer Accounts and passwords (Base64 encoded).
+        \item Customer PII - includes phone numbers, address, and payments (including amounts).
+        \item Invoices and payments.
+        \item Creation of administrator accounts for \cptc's croissant marketplace.
+        \item Insertion, deletion, and modification of all data within the database.
+    \end{itemize}
+
+    \Figure[placement=h, width=\textwidth, frame, caption={Passwordless Root MariaDB Access}]{images/findings/high/example_high_finding1.png}
+
+% Impact ================================================================================ 
+\noindent
+\textbf{Potential Business Impact}:
+
+    This host (Charley) can severely impact the  Confidentiality, Integrity, and Availability (CIA) of transactions within the warehouse management systems. Improper encoding schemes result in an environment in which all of the \cptc\ store website (Scrumdiddlyumptious) users' passwords can be decoded from base64.
+    
+    All accounts can also be modified to granted administrator level access on the \cptc\ store. As data is parsed through the root user, transactions, account details, items (for sale), and other information which is integral to \cptc's ability to sell its products online may be subject to unauthorized modification. This data is not directly accessed by the web store host (Scrumdiddlyumptious), but rather through an API endpoint host (Whatchamacallit).
+    \noindent
+    
+    
+    \textbf{Affected Hosts}:
+    
+    Charley (10.0.17.14)
+    
+    Scrumdiddlyumptious (10.0.17.12)
+    
+    Whatchamacallit (10.0.17.13)
+
+% Details ================================================================================ 
+\noindent
+\textbf{Exploitation Details}:
+
+    \teamname\ used the MySQL command line application to query the unauthenticated database as the root user.  All customer information could be obtained without modifying the database schema or contents.  This user also had write permissions, meaning a malicious actor could arbitrarily modify database contents.
+    
+    Figure \ref{fig:images/findings/high/example_high_finding2.png} shows the connection from the PostgreSQL server and initial shell commands.
+    
+    \Figure[placement=h, width=\textwidth, frame, caption={MariaDB tokens Table Dump}]{images/findings/high/example_high_finding2.png}
+
+% Remediation ================================================================================ 
+\noindent
+\textbf{Recommended Remediation}:
+
+A minimal number of hosts should be able to interact on the network with the MySQL database. By limiting network access to only those required hosts, potential attacks against the MySQL service are minimized.  The following iptables commands can be used to enable access controls and limit which hosts can reach MySQL:
+
+\begin{lstlisting}[language=bash,frame=single,showstringspaces=false]
+iptables -A INPUT -p tcp --dport 3306 -s <IP> -j ACCEPT
+iptables -A INPUT -p tcp --dport 8000 -j DROP
+\end{lstlisting}
+
+If a firewall is not an option due to constraints within the environment (we recommend using a firewall), another option is to use ACLs within MySQL. This can be done by altering users to only be accessible via certain IPs or domains. This can be done using the following commands:
+
+% charles here
+\begin{lstlisting}[language=bash,frame=single,showstringspaces=false]
+CREATE USER `user'@`localhost' IDENTIFIED BY `password';
+CREATE USER `user'@`10.0.17.13' IDENTIFIED BY `password';
+\end{lstlisting}
+
+\noindent
+\textbf{References}:
+
+    \url{https://dev.mysql.com/doc/mysql-security-excerpt/8.0/en/general-security-issues.html}
+    
+    \url{https://dev.mysql.com/doc/mysql-security-excerpt/8.0/en/access-control.html}
+    
+    \url{https://www.digitalocean.com/community/tutorials/iptables-essentials-common-firewall-rules-and-commands}
+\noindent

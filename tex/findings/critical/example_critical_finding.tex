@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Penetration Test Report Template           %
+%                     cyber@cfreg                     %
+%             https://hack.newhaven.edu/              %
+%                                                     %
+%                    Contributors:                    %
+% TJ Balon - https://github.com/tjbalon               %
+% Samuel Zurowski - https://github.com/samuelzurowski %
+% Charles Barone - https://github.com/CharlesBarone   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Lack Of PostgreSQL Authentication}
+\label{sec:creds}
+\noindent
+
+\vulntext{9.5}
+
+\noindent
+
+
+\color{black}{}
+\textbf{Description}:
+
+The host Charley on the network did not require password authentication for the postgres user in PostgreSQL. As a result, attackers can access all databases on charley and enumerate data found. The postgres user has full control over the database within the host.
+
+\Figure[placement=h, width=\textwidth, frame, caption={User postgres does not require a password to authenticate.}]{images/findings/critical/example_critical_finding1.png}
+
+\noindent
+\textbf{Potential Business Impact}:
+
+The data stored within this database contained unencrypted database information which is a direction violation of PCI DSS more information information can be found in Section \ref{sec:compliance}. Failures of PCI DSS can result in fines and other punishments. Each security incidents and breaches can result of a \$500,000 fine \cite{pcidssfineexample}. Figure \ref{fig:images/findings/critical/example_critical_finding2.png} shows that credit card information was stored encrypted.
+
+\Figure[placement=h, width=\textwidth, frame, caption={PostgreSQL Billing Table stored in the clear.}]{images/findings/critical/example_critical_finding2.png}
+
+
+\noindent
+\textbf{Affected Host}:
+
+    Eggdicator (10.0.17.10)
+    
+    Scrumdiddlyumptious (10.0.17.12)
+    
+    Charley (10.0.17.14)
+
+\noindent
+\textbf{Exploitation Details}:
+    
+    A user who can connect to 10.0.17.14 can connect to the postgresql server by running the following command:
+    
+\begin{lstlisting}[language=bash,frame=single,showstringspaces=false]
+psql -U postgres -p 5432 -h 10.0.17.14
+\end{lstlisting}
+
+
+\noindent
+\textbf{Recommended Remediation}:
+
+    Harden the PostgreSQL server to require password authentication. Additionally, having firewall access controls to restrict what respective IP addresses can access the database would provide an additional layer of security.
+    
+\begin{lstlisting}[language=bash,frame=single,showstringspaces=false]
+ALTER USER postgres PASSWORD `B3tt3rP@ssw0rd';
+\end{lstlisting}
+
+    Additionally, the PostgreSQL instance could be further hardened by making rules in the \textit{pg\_hba.conf} file to only allow for authentication from certain hosts. More information about this configuration file can be found in the references for this section.
+
+\noindent
+\textbf{References}:
+
+    \url{https://www.postgresql.org/docs/13/auth-password.html}
+    
+    \url{https://www.postgresql.org/docs/9.2/auth-pg-hba-conf.html}
+
+
+\newpage
